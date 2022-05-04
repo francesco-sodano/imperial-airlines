@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "run": "npx tsc|node dist/server.js",
-    "test": "jest --detectOpenHandles"
+    "test": "npx tsc|jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
