@@ -10,7 +10,7 @@ export async function getAccessToken(): Promise<string> {
                 grant_type: 'client_credentials',
                 client_id: process.env.CLIENT_ID,
                 client_secret: process.env.CLIENT_SECRET,
-                resource: process.env.RESOURCE
+                resource: process.env.RESOURCE_ID
             }),
             headers: {
                 'content-type': 'application/x-www-form-urlencoded;charset=utf-8'

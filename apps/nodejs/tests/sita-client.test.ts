@@ -12,7 +12,7 @@ describe("test authentication", () => {
 describe("test subscription", () => {
     it("should create subscription", async () => {
         const token = await getAccessToken();
-        // const sub = await createSubscription(token);
-        // expect(sub.subscriptionId).toBeGreaterThan(0);
+        //const sub = await createSubscription(token);
+        //expect(sub.subscriptionId).toBeGreaterThan(0);
     })
 })
