@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "run": "npx tsc|node dist/server.js",
-    "test": "jest"
+    "test": "jest --detectOpenHandles --setupFiles dotenv/config"
   },
   "keywords": [],
   "author": "",
