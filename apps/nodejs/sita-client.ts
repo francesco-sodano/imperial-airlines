@@ -15,7 +15,7 @@ export async function getAccessToken(): Promise<string> {
             'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
         }
     })
-    return x.data
+    return x.data.access_token
 }
 
 export async function createSubscription(accessToken: string): Promise<Subscription> {
