@@ -15,6 +15,17 @@ export async function getAccessToken(): Promise<string> {
             'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
         }
     })
-    console.log(x)
+    return x.data
+}
+
+export async function createSubscription(accessToken: string): Promise<Subscription> {
+    const x = await axios({
+        method: 'post',
+        url: `https://${process.env.BASE_URL}/session/v2/subscriptions`,
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+            'Authorization': `Bearer ${accessToken}`
+        }
+    })
     return x.data
 }

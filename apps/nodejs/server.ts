@@ -15,4 +15,5 @@ app.get('/', (req:Express.Request, res: Response) => {
 
 app.listen(port, async() => {
     console.log(`[server]: Server is running at https://localhost:${port}`);
+
 });
