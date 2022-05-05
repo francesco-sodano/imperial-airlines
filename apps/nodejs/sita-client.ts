@@ -84,7 +84,6 @@ export async function createConnection(accessToken: string,
                 'Authorization': `Bearer ${accessToken}`
             }
         })
-        console.log(x.data)
         return x.data
     } catch (e) {
         console.log(e)

@@ -1,3 +1,4 @@
+
 type SitaResponse = {
     status: string;
     data: any;
@@ -25,4 +26,9 @@ type Connection = {
     SubscriptionId: string;
     ReservationId: string;
     DeviceId: string;
+}
+
+type SBClient = {
+    serviceBusClient: any;
+    subscription: any;
 }
