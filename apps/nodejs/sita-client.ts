@@ -25,13 +25,19 @@ export async function getAccessToken(): Promise<string> {
 }
 
 export async function createSubscription(accessToken: string): Promise<Subscription> {
-    const x = await axios({
-        method: 'post',
-        url: `https://${process.env.BASE_URL}/session/v2/subscriptions`,
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-            'Authorization': `Bearer ${accessToken}`
-        }
-    })
-    return x.data
+    try {
+        const x = await axios({
+            method: 'post',
+            url: `https://${process.env.BASE_URL}/session/v2/subscriptions`,
+            headers: {
+                'location-id': process.env.LOCATION_ID || '',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        return x.data
+    } catch (e) {
+        console.log(e)
+    }
+    return {} as Subscription
 }
