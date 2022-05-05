@@ -138,3 +138,29 @@ export async function stopScan(accessToken: string,
         console.log(e)
     }
 }
+
+export async function printBoardingPassAea(accessToken: string,
+    connectionId: string, correlationId: string, aeaPrintData: AeaPrintData): Promise<void> {
+    try {
+        const x = await axios({
+            method: 'post',
+            url: `https://${process.env.BASE_URL}/print/v2/boardingpass/aea`,
+            data: {
+                connectionId: connectionId,
+                correlationId: correlationId,
+                aeaPrintData: aeaPrintData
+            },
+            headers: {
+                'location-id': process.env.LOCATION_ID || '',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        console.log(x.data)
+        console.log('Print boarding pass aea successful')
+        return x.data
+    } catch (e) {
+        console.log(e)
+    }
+}
+
