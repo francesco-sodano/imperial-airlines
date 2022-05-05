@@ -103,7 +103,7 @@
         {
         "type": "Microsoft.Web/sites",
         "apiVersion": "2021-02-01",
-        "name": "[parameters('webAppNameFront')]",
+        "name": "[parameters('webAppNameBack')]",
         "location": "[resourceGroup().location]",
         "properties": {
             "httpsOnly": true,
