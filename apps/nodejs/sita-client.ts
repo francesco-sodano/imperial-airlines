@@ -41,3 +41,25 @@ export async function createSubscription(accessToken: string): Promise<Subscript
     }
     return {} as Subscription
 }
+
+export async function createReservation(accessToken: string): Promise<Reservation> {
+    try {
+        const x = await axios({
+            method: 'post',
+            url: `https://${process.env.BASE_URL}/site/v2/reservations`,
+            data: {
+                LocationId: process.env.LOCATION_ID
+            },
+            headers: {
+                'location-id': process.env.LOCATION_ID || '',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        // Todo: handle array
+        return x.data[0]
+    } catch (e) {
+        console.log(e)
+    }
+    return {} as Reservation
+}

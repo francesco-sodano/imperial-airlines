@@ -5,9 +5,16 @@ type SitaResponse = {
 }
 
 type Subscription = {
-    "subscriptionId": string;
-    "topicName": string;
-    "subscriptionName": string;
-    "expiryTime": Date;
-    "connectionString": string;
+    subscriptionId: string;
+    topicName: string;
+    subscriptionName: string;
+    expiryTime: Date;
+    connectionString: string;
+}
+
+type Reservation = {
+    reservationId: string;
+    airlineCode: string;
+    locationId: string;
+    expiryTime: Date;
 }
