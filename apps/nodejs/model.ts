@@ -18,3 +18,11 @@ type Reservation = {
     locationId: string;
     expiryTime: Date;
 }
+
+type DeviceType = "OCR1" | "MSR1" | "LSR1" | "GPP1" | "ATB1" | "BTP1"
+
+type Connection = {
+    SubscriptionId: string;
+    ReservationId: string;
+    DeviceId: string;
+}
