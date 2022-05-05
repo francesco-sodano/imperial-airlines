@@ -1,4 +1,4 @@
-import { createConnection, createReservation, createSubscription, getAccessToken } from '../sita-client';
+import { createConnection, createReservation, createSubscription, getAccessToken, startScan, stopScan } from '../sita-client';
 const dotenv = require('dotenv')
 
 dotenv.config()
@@ -35,7 +35,25 @@ describe("test connection", () => {
             process.env.LOCATION_SCANNER || '',
             subscription.subscriptionId,
             reservation.reservationId,
-        'OCR1')
+            'OCR1')
         expect(reservation.reservationId?.length).toBeGreaterThan(0);
     })
+})
+
+describe("Start scan", () => {
+    it("should return valid date time", async () => {
+        const token = await getAccessToken()
+        const subscription = await createSubscription(token)
+        const reservation = await createReservation(token, process.env.LOCATION_SCANNER || '')
+        const connection = await createConnection(token,
+            process.env.LOCATION_SCANNER || '',
+            subscription.subscriptionId,
+            reservation.reservationId,
+            'OCR1')
+        const startScanResponse = await startScan(token, connection.connectionId);
+        await stopScan(token, connection.connectionId);
+        expect(startScanResponse.AccessExpiryTime.toString().length).toBeGreaterThan(0);
+    })
+
+   
 })
