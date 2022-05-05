@@ -1,0 +1,126 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+
+    "parameters": {
+      "webAppNameFront": {
+        "type": "string",
+        "metadata": {
+            "description": "Web app name frontend."
+            }
+        },
+    "webAppNameBack": {
+        "type": "string",
+        "metadata": {
+            "description": "Web app name backend."
+            }
+        },
+    "skuFront": {
+        "type": "string",
+        "defaultValue": "F1",
+        "metadata": {
+            "description": "The SKU of App Service Plan frontend."
+            }
+        },
+    "skuBack": {
+        "type": "string",
+        "defaultValue": "F1",
+        "metadata": {
+            "description": "The SKU of App Service Plan backend."
+            }
+        },
+    "linuxFxVersionFront": {
+        "type": "string",
+        "metadata": {
+            "description": "The Runtime stack of current web app frontend"
+            }
+        },
+    "linuxFxVersionBack": {
+        "type": "string",
+        "metadata": {
+            "description": "The Runtime stack of current backend"
+            }
+        }
+    },
+
+    "variables": {
+      "appServicePlanPortalNameFront": "[format('plan-{0}', parameters('webAppNameFront'))]",
+      "appServicePlanPortalNameBack": "[format('plan-{0}', parameters('webAppNameBack'))]"
+    },
+
+    "resources": [
+        {
+        "type": "Microsoft.Web/serverfarms",
+        "apiVersion": "2021-02-01",
+        "name": "[variables('appServicePlanPortalNameFront')]",
+        "location": "[resourceGroup().location]",
+        "sku": {
+            "name": "[parameters('skuFront')]"
+            },
+        "kind": "linux",
+        "properties": {
+            "reserved": true
+            }
+        },
+
+        {
+        "type": "Microsoft.Web/serverfarms",
+        "apiVersion": "2021-02-01",
+        "name": "[variables('appServicePlanPortalNameBack')]",
+        "location": "[resourceGroup().location]",
+        "sku": {
+            "name": "[parameters('skuBack')]"
+            },
+        "kind": "linux",
+        "properties": {
+            "reserved": true
+            }
+        },
+
+        {
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2021-02-01",
+        "name": "[parameters('webAppNameFront')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "httpsOnly": true,
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalNameFront'))]",
+            "siteConfig": {
+                "linuxFxVersion": "[parameters('linuxFxVersionFront')]",
+                "minTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "alwaysOn": true
+                }
+            },
+        "identity": {
+            "type": "SystemAssigned"
+            },
+        "dependsOn": [
+            "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalNameFront'))]"
+            ]
+        },
+
+        {
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2021-02-01",
+        "name": "[parameters('webAppNameBack')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "httpsOnly": true,
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalNameBack'))]",
+            "siteConfig": {
+                "linuxFxVersion": "[parameters('linuxFxVersionBack')]",
+                "minTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "alwaysOn": true
+            }
+        },
+        "identity": {
+            "type": "SystemAssigned"
+            },
+        "dependsOn": [
+            "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalNameBack'))]"
+            ]
+        }
+    ]
+}

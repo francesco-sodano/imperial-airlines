@@ -25,3 +25,12 @@ The reward for this challenge is, anyway, as great as the challenge itself: a bi
 Would you accept the challenge? :)
 
 ## Project Structure
+
+The application Architecture is the following:
+
+- Front-End application (Node JS 16 LTS) running in a Linux Web App Service that integrates the UI
+- Back-End application (.NET 6) running in a Linux App Service and connect to SITA Flex APIs
+
+# Front-End Application
+
+# Back-End Application
