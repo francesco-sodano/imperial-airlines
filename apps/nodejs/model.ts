@@ -32,3 +32,10 @@ type Connection = {
 type StartScanResponse = {
     AccessExpiryTime: Date;
 }
+
+type AeaPrintData = {
+    pectab: string;
+    templates?: string[];
+    logos?: string[];
+    printData: string
+}
