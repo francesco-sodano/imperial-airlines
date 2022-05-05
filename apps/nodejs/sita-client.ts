@@ -1,4 +1,5 @@
 import axios from 'axios'
+import console from 'console'
 import qs from 'qs'
 
 export async function getAccessToken(): Promise<string> {
@@ -89,4 +90,51 @@ export async function createConnection(accessToken: string,
         console.log(e)
     }
     return {} as Connection
+}
+
+export async function startScan(accessToken: string,
+    connectionId: string): Promise<StartScanResponse> {
+    try {
+        const x = await axios({
+            method: 'post',
+            url: `https://${process.env.BASE_URL}/scan/v2/startscanning`,
+            data: {
+                connectionId: connectionId
+            },
+            headers: {
+                'location-id': process.env.LOCATION_ID || '',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        console.log(x.data)
+        console.log('Start scanning successful');
+        return x.data
+    } catch (e) {
+        console.log(e)
+    }
+    return {} as StartScanResponse
+}
+
+export async function stopScan(accessToken: string,
+    connectionId: string): Promise<void> {
+    try {
+        const x = await axios({
+            method: 'post',
+            url: `https://${process.env.BASE_URL}/scan/v2/stopscanning`,
+            data: {
+                connectionId: connectionId
+            },
+            headers: {
+                'location-id': process.env.LOCATION_ID || '',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        console.log(x.data)
+        console.log('Stop scanning successful')
+        return x.data
+    } catch (e) {
+        console.log(e)
+    }
 }

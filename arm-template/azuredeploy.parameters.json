@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "webAppNameFront": {
+            "value": "imperial-airline"
+        },
+        "webAppNameBack": {
+            "value": "flexengine"
+        },
+        "skuFront": {
+            "value": "P1v2"
+        },
+        "skuBack": {
+            "value": "P1v2"
+        },
+        "linuxFxVersionFront": {
+            "value": "NODE|16-lts"
+        },
+        "linuxFxVersionBack": {
+            "value": "DOTNETCORE|6.0"
+        }
+    }
+}

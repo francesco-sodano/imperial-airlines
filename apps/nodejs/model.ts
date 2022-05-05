@@ -26,6 +26,12 @@ type Connection = {
     SubscriptionId: string;
     ReservationId: string;
     DeviceId: string;
+    connectionId: string;
+    expiryTime: Date;
+}
+
+type StartScanResponse = {
+    AccessExpiryTime: Date;
 }
 
 type SBClient = {
