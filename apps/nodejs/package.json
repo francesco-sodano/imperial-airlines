@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "npx tsc|node dist/server.js",
+    "start": "npx tsc|cp -r html dist/ | node dist/server.js",
     "test": "npx tsc|jest --detectOpenHandles"
   },
   "keywords": [],

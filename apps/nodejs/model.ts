@@ -1,3 +1,4 @@
+
 type SitaResponse = {
     status: string;
     data: any;
@@ -33,9 +34,7 @@ type StartScanResponse = {
     AccessExpiryTime: Date;
 }
 
-type AeaPrintData = {
-    pectab: string;
-    templates?: string[];
-    logos?: string[];
-    printData: string
+type SBClient = {
+    serviceBusClient: any;
+    subscription: any;
 }
